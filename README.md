@@ -1,19 +1,36 @@
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Frontend en React, usando NextJS
+## Getting Started
 
-Se trata de hacer una aplicación con NextJS (así pues, full-stack) que sea muy simple pero utilice las partes clave de dNextJS para hacer un primer uso en un proyecto con la intención de practicar, antes de hacer el proyecto. Es necesario tocar el máximo de las siguientes características de NextJS (con AppRouter):
+First, run the development server:
 
-1. App Router, es decir las carpetas como rutas (`page.tsx`).
-2. Usar [ShadcnUI](https://ui.shadcn.com) para componentes de interface.
-3. Usar layouts (`layout.tsx`), errores (`error.tsx`) y loading (`loading.tsx`).
-4. Usar [actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) para hacer cosas en el servidor.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-La idea subyacente a la aplicación es libre completamente, pero debe ser sencilla (queremos programar una "prueba de concepto", no una app entera), y de la misma envergadura que el proyecto que se hizo en clase (el TODO List). Algunos ejemplos:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Un pequeño gestor de ficheros: se muestra una lista de ficheros y se puede 1) añadir un fichero (con un campo de formulario), 2) borrar un fichero, 3) descargar un fichero. Una opción muy chula es que se pueda [arrastarar un fichero](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop). Este ejercicio no requiere una base de datos, realmente.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- Un foro donde la gente puede hacer comentarios. En realidad es un foro público y no hay que hacer login para poder comentar, pero al poner un comentario se le pide al usuario alguna información por si luego quiere poder borrar sus mensajes. Cada mensaje tiene texto, nombre del autor y fecha.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-- Editor de una receta: se puede editar una descripción y luego una lista de ingredientes. Cada ingrediente es lo mínimo: nombre y cantidad. En principio solo hay una receta, y es recomendable no usar base de datos y guardar solo un fichero JSON. Aunque una vez hecho eso, es fácil permitir tener más de una receta.
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

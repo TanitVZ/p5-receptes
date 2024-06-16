@@ -1,0 +1,11 @@
+{
+
+    "id": 1,
+    "titol": "Paella Valenciana",
+    "ingredients": [
+      { "id": 1, "quantitat": "1", "mesura": "", "nom": "Ous" },
+      { "id": 2, "quantitat": "3", "mesura": "", "nom": "Pebrots" },
+      { "id": 3, "quantitat": "1", "mesura": "Kg", "nom": "Arroç" }
+    ]
+
+}
