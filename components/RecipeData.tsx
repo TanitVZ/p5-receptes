@@ -1,8 +1,8 @@
 import React from 'react'
-import type { RecipeData } from '@/lib/receptes'
+import type { Recipe } from '@/lib/receptes'
 
-export default function RecipeData({recipes} : {recipes : RecipeData}) {
+export default function RecipeData({recipes} : {recipes : Recipe}) {
   return (
-    <div>{recipes.titol}</div>
+    <h1>{recipes.titol}</h1>
   )
 }

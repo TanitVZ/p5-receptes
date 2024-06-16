@@ -1,12 +1,13 @@
+import Ingredient from "@/components/Ingredient";
 import RecipeData from "@/components/RecipeData";
 import data from "@/receptes.json"
 
 export default function Home() {
   return (
     <main className="p-8">
-      <h1>Paella Valenciana</h1>
+       <RecipeData recipes={data} />
       <ul>
-     <RecipeData recipes={data} />
+      <Ingredient recipe={data} />
       </ul>
     </main>
   );

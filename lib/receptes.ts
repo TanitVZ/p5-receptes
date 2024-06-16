@@ -1,12 +1,12 @@
 
 
-export type RecipeData = {
+export type Recipe = {
     id: number,
     titol: string,
     ingredients: Ingredient[]
 }
 
-type Ingredient = {
+export type Ingredient = {
     id : number, 
     quantitat : string,
     mesura? : string,
