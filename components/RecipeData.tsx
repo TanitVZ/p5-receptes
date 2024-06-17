@@ -1,20 +1,45 @@
 "use client"
 
-import React from 'react'
-import type { Recipe } from '@/lib/receptes'
+import React, { ChangeEventHandler, useState } from 'react'
+import type { Recipe , Ingredient} from '@/lib/receptes'
 import { Input } from '@/components/ui/input'
 
 import { Select,  SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
+
+const initialIngredient = {
+  id : 0, 
+  quantitat : 0,
+  mesura : "",
+  nom : ""
+}
 
 export default function RecipeData({recipes} : {recipes : Recipe}) {
+
+  const [ingredient, setIngredient] = useState<Ingredient>(initialIngredient);
+  
+  const addJsonIngredient = (i:Ingredient) => () => {
+    console.log(`Quantitat: ${i.quantitat} Mesura:${i.mesura} Ingredient:${i.nom}`)
+  }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault
+  }
+
+  const addQuantitat: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setIngredient((prev) => ({...prev, quantitat : Number(e.target.value)}))
+  }
+
+  //setIngredientQuantitat(0);
+
   return (
     <>
     <h1>{recipes.titol}</h1>
+    <form onSubmit={handleSubmit}>
     <div>
       <label>Quantitat</label>
-      <Input type="number" placeholder="quantitat"/>
+      <Input type="number"  name="ingredientQuantitat" onChange={addQuantitat}/>
       <label>Mesura</label>
-      <Select>
+      <Select name="ingredientMesura">
         <SelectTrigger>
           <SelectValue placeholder="Sel·lecciona mesura"/>
         </SelectTrigger>
@@ -24,8 +49,10 @@ export default function RecipeData({recipes} : {recipes : Recipe}) {
         </SelectContent>
       </Select>
       <label>Ingredient</label>
-      <Input type="text" placeholder="ingredient"/>
+      <Input type="text" name="ingredientNom" placeholder="ingredient"/>
     </div>
+    <Button onClick={addJsonIngredient(ingredient)}>Afegeix ingredient</Button>
+    </form>
 </>
   )
 }

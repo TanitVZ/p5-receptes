@@ -8,7 +8,7 @@ export type Recipe = {
 
 export type Ingredient = {
     id : number, 
-    quantitat : string,
+    quantitat : number,
     mesura? : string,
     nom : string
 }
