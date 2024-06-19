@@ -22,14 +22,20 @@ export default function RecipeData({recipes} : {recipes : Recipe}) {
     console.log(`Quantitat: ${i.quantitat} Mesura:${i.mesura} Ingredient:${i.nom}`)
   }
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault
+    e.preventDefault()
   }
 
   const addQuantitat: ChangeEventHandler<HTMLInputElement> = (e) => {
     setIngredient((prev) => ({...prev, quantitat : Number(e.target.value)}))
   }
 
-  //setIngredientQuantitat(0);
+
+  const addNom: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setIngredient((prev) => ({...prev, nom : e.target.value}))
+  }
+
+  const addMesura = (v: string) => setIngredient((prev) => ({ ...prev, mesura: v }))
+
 
   return (
     <>
@@ -39,7 +45,8 @@ export default function RecipeData({recipes} : {recipes : Recipe}) {
       <label>Quantitat</label>
       <Input type="number"  name="ingredientQuantitat" onChange={addQuantitat}/>
       <label>Mesura</label>
-      <Select name="ingredientMesura">
+      <Select name="mesura"   onValueChange={addMesura}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Sel·lecciona mesura"/>
         </SelectTrigger>
@@ -49,7 +56,7 @@ export default function RecipeData({recipes} : {recipes : Recipe}) {
         </SelectContent>
       </Select>
       <label>Ingredient</label>
-      <Input type="text" name="ingredientNom" placeholder="ingredient"/>
+      <Input type="text" name="ingredientNom" onChange={addNom} placeholder="ingredient"/>
     </div>
     <Button onClick={addJsonIngredient(ingredient)}>Afegeix ingredient</Button>
     </form>
