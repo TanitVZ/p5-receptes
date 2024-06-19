@@ -1,6 +1,6 @@
 import Ingredient from "@/components/Ingredient";
 import RecipeData from "@/components/RecipeData";
-import data from "@/receptes.json"
+import data from "@/public/receptes.json"
 
 export default function Home() {
   return (
