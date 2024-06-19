@@ -77,5 +77,7 @@
 
   h1 {
 
-    @apply font-bold text-4xl mb-4;
+    @apply font-bold text-4xl mb-4 text-gray-700;
   }
+
+

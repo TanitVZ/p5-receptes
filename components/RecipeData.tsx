@@ -80,7 +80,8 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
     <>
       <h1>{recipes.titol}</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="flex items-center space-x-4">
+          <div className="w-20">
           <label>Quantitat</label>
           <Input
             type="string"
@@ -88,6 +89,8 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
             value={ingredient.quantitat}
             onChange={addQuantitat}
           />
+          </div>
+          <div className="w-20">
           <label>Mesura</label>
           <Select
             name="mesura"
@@ -95,13 +98,15 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
             onValueChange={addMesura}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Sel·lecciona mesura" />
+              <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Kg">Kg</SelectItem>
               <SelectItem value="l">l</SelectItem>
             </SelectContent>
           </Select>
+          </div>
+          <div className="flex-4">
           <label>Ingredient</label>
           <Input
             type="text"
@@ -110,8 +115,11 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
             onChange={addNom}
             placeholder="ingredient"
           />
-        </div>
+          </div>
+        <div className="pt-6">
         <Button type="submit">Afegeix ingredient</Button>
+        </div>
+        </div>
       </form>
       
     </>

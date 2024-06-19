@@ -6,7 +6,7 @@ import type { Recipe } from "@/lib/receptes";
 export default function Ingredient({ recipe }: { recipe: Recipe }) {
   return (
     <>
-      <div className="flex flex-col justify-center gap-4">
+      <div className="flex flex-col justify-center gap-4 p-6">
         {recipe.ingredients.map((i) => (
           <li
             key={i.id}
