@@ -1,8 +1,10 @@
 import Ingredient from "@/components/Ingredient";
 import RecipeData from "@/components/RecipeData";
-import data from "@/public/receptes.json"
+import { readReceptes } from "./actions/receptes";
 
-export default function Home() {
+export default async function Home() {
+  const data = await readReceptes();
+  
   return (
     <main className="p-8">
        <RecipeData recipes={data} />

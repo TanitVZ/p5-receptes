@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { updateReceptes } from "@/app/actions/receptes";
 
 const initialIngredient: Ingredient = {
   id: 0,
@@ -19,57 +20,50 @@ const initialIngredient: Ingredient = {
   mesura: "",
   nom: "",
 };
- 
-
 
 export default function RecipeData({ recipes }: { recipes: Recipe }) {
   const [ingredient, setIngredient] = useState<Ingredient>(initialIngredient);
-  const [json, setJson] = useState<Recipe | null>(null);
+  const [json, setJson] = useState<Recipe>(recipes);
 
-  useEffect(() => {
-    fetch("/receptes.json")
-      .then((response) => response.json())
-      .then((json: Recipe) => setJson(json))
-      .catch((error) => console.error("Error al cargar el JSON:", error));
-  }, []);
 
-  const addJsonIngredient = (i: Ingredient) => () => {
-    console.log(
-      `Id: ${i.id} Quantitat: ${i.quantitat} Mesura:${i.mesura} Ingredient:${i.nom}`
-    );
 
-      
+  const getNextIngredientId = () => {
     if (json) {
-     
+      const maxId = json.ingredients.reduce(
+        (max, ingredient) => (ingredient.id > max ? ingredient.id : max),
+        0
+      );
+      return maxId + 1;
+    }
+
+    return 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log("hellou");
+   
+    
+    e.preventDefault();
+
+    if (json) {
+      console.log("tinc json");
       const newIngredient: Ingredient = {
         ...ingredient,
         id: getNextIngredientId(),
       };
-      console.log(newIngredient.id, newIngredient.nom)
-    const updatedJson = {...json, ingredients:[...json.ingredients, newIngredient]
 
-    };
-    setJson(updatedJson)
-    setIngredient(initialIngredient);
- 
-  } 
-  };
+      console.log(newIngredient.id, newIngredient.nom);
+      const updatedJson = {
+        ...json,
+        ingredients: [...json.ingredients, newIngredient],
+      };
+      setJson(updatedJson);
+      setIngredient(initialIngredient);
 
-  const getNextIngredientId = () => {
-    if(json) {
-
-      const maxId = json.ingredients.reduce((max, ingredient) => (ingredient.id > max ? ingredient.id : max), 0);
-    return maxId + 1
+      await updateReceptes(updatedJson);
     }
-    
-    return 0;
-    
+    else {console.log("no tinc json");}
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
- 
-  }
   const addQuantitat: ChangeEventHandler<HTMLInputElement> = (e) => {
     //setIngredient((prev) => ({ ...prev, quantitat: Number(e.target.value) }));
     setIngredient((prev) => ({ ...prev, quantitat: e.target.value }));
@@ -81,8 +75,6 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
 
   const addMesura = (v: string) =>
     setIngredient((prev) => ({ ...prev, mesura: v }));
-
-
 
   return (
     <>
@@ -119,11 +111,10 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
             placeholder="ingredient"
           />
         </div>
-        <Button onClick={addJsonIngredient(ingredient)}>
-          Afegeix ingredient
-        </Button>
+        <Button type="submit">Afegeix ingredient</Button>
       </form>
-      <pre>{JSON.stringify(json, null, 2)}</pre> 
+      
+      <pre>{JSON.stringify(json, null, 2)}</pre>
     </>
   );
 }
