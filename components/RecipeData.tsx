@@ -114,7 +114,6 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
         <Button type="submit">Afegeix ingredient</Button>
       </form>
       
-      <pre>{JSON.stringify(json, null, 2)}</pre>
     </>
   );
 }

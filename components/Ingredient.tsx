@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import type { Ingredient } from "@/lib/receptes";
 import type { Recipe } from "@/lib/receptes";
