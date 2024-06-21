@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { updateReceptes } from "@/app/actions/receptes";
+import { actionUpdateReceptes } from "@/app/actions/receptes";
 
 const initialIngredient: Ingredient = {
   id: 0,
@@ -60,10 +60,15 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
       setJson(updatedJson);
       setIngredient(initialIngredient);
 
-      await updateReceptes(updatedJson);
+      await actionUpdateReceptes(updatedJson);
     }
     else {console.log("no tinc json");}
   };
+
+  const deleteIngredient = async (id:number) => {
+    const updatedJson = { ...json, ingredients: json.ingredients.filter(ingredient => ingredient.id !== id)}
+    await actionUpdateReceptes(updatedJson);
+  }
   const addQuantitat: ChangeEventHandler<HTMLInputElement> = (e) => {
     //setIngredient((prev) => ({ ...prev, quantitat: Number(e.target.value) }));
     setIngredient((prev) => ({ ...prev, quantitat: e.target.value }));

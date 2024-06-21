@@ -1,9 +1,9 @@
 import Ingredient from "@/components/Ingredient";
 import RecipeData from "@/components/RecipeData";
-import { readReceptes } from "./actions/receptes";
+import { actionReadReceptes } from "./actions/receptes";
 
 export default async function Home() {
-  const data = await readReceptes();
+  const data = await actionReadReceptes();
   
   return (
     <main className="p-8">
