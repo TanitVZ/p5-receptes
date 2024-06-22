@@ -7,7 +7,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function Recipe({ recipes: recipe }: { recipes: RecipeType }) {
-  const path = `./receptes/${recipe.id}`;
+  const path = `./recipes/${recipe.id}`;
 
   return (
     <Link

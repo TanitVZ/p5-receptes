@@ -1,14 +1,23 @@
 import Ingredient from "@/components/Ingredient";
 import RecipeData from "@/components/RecipeData";
-import { actionReadReceptes } from "@/actions/receptes";
+import { actionReadRecepta, actionReadReceptes } from "@/actions/receptes";
 import { IngredientType } from "@/lib/receptes";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+//export const dynamic = "force-dynamic";
+//export const revalidate = 0;
 
-export default async function Home() {
-  const data = await actionReadReceptes();
-  
+type PageProps = {
+    params: {
+        recipeId: string;
+    };
+  };
+
+
+export default async function Page({ params }: PageProps){
+
+  const { recipeId } = params;
+  const data = await actionReadRecepta(Number(recipeId));
+  console.log(data)
   return ( 
     <main className="p-8">
        <RecipeData recipes={data} />

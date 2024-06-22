@@ -1,11 +1,21 @@
-
-"use server"
+"use server";
+import RecipeData from "@/components/RecipeData";
 import { IngredientType, RecipeType } from "@/lib/receptes";
 import fs from "fs";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
 const jsonFilePath = "./data/receptes.json";
+
+export async function actionReadRecepta(id: number) {
+  const jsonData = fs.readFileSync(jsonFilePath, "utf8");
+
+  const recipes = JSON.parse(jsonData);
+  const recipe = recipes.find((recep: RecipeType) => recep.id === id);
+
+  if (recipe) return recipe;
+  else console.log("no hi ha recepta");
+}
 
 export async function actionReadReceptes() {
   const jsonData = fs.readFileSync(jsonFilePath, "utf8");
@@ -14,7 +24,6 @@ export async function actionReadReceptes() {
 }
 
 export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
-
   const jsonData = fs.readFileSync(jsonFilePath, "utf8");
   console.log(JSON.stringify(updatedRecipes));
 
@@ -22,10 +31,13 @@ export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
   revalidatePath("/");
 }
 
-export async function actionDeleteIngredient(id: Number, recipes : RecipeType) {
-  const updatedJson = {...recipes, ingredients: recipes.ingredients.filter( ingredient => ingredient.id !== id)}
+export async function actionDeleteIngredient(id: Number, recipes: RecipeType) {
+  const updatedJson = {
+    ...recipes,
+    ingredients: recipes.ingredients.filter(
+      (ingredient) => ingredient.id !== id
+    ),
+  };
   fs.writeFileSync(jsonFilePath, JSON.stringify(updatedJson), "utf8");
   revalidatePath("/");
-  
 }
-
