@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { actionReadReceptes, actionUpdateReceptes } from "@/app/actions/receptes";
+import { actionReadReceptes, actionUpdateReceptes } from "@/actions/receptes";
 
 const initialIngredient: IngredientType = {
   id: 0,

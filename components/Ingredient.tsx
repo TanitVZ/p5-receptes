@@ -2,9 +2,9 @@
 import React from "react";
 import type { IngredientType } from "@/lib/receptes";
 import type { RecipeType } from "@/lib/receptes";
-import { actionDeleteIngredient } from "@/app/actions/receptes";
+import { actionDeleteIngredient } from "@/actions/receptes";
 
-
+ 
 export default function Ingredient({ ingredient, recipes}: { ingredient: IngredientType, recipes  : RecipeType}) {
   return (
     <>
