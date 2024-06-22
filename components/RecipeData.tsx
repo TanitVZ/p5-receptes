@@ -1,7 +1,7 @@
 "use client";
 
-import React, { ChangeEventHandler, useEffect, useState } from "react";
-import type { Recipe, Ingredient } from "@/lib/receptes";
+import React, { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import type { RecipeType, IngredientType } from "@/lib/receptes";
 import { Input } from "@/components/ui/input";
 
 import {
@@ -12,20 +12,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { actionUpdateReceptes } from "@/app/actions/receptes";
+import { actionReadReceptes, actionUpdateReceptes } from "@/app/actions/receptes";
 
-const initialIngredient: Ingredient = {
+const initialIngredient: IngredientType = {
   id: 0,
   quantitat: "",
   mesura: "",
   nom: "",
 };
 
-export default function RecipeData({ recipes }: { recipes: Recipe }) {
-  const [ingredient, setIngredient] = useState<Ingredient>(initialIngredient);
-  const [json, setJson] = useState<Recipe>(recipes);
+export default function RecipeData({ recipes }: { recipes: RecipeType }) {
+  const [ingredient, setIngredient] = useState<IngredientType>(initialIngredient);
+  const [json, setJson] = useState<RecipeType>(recipes);
 
-
+  const formRef = useRef<HTMLFormElement>(null);
 
   const getNextIngredientId = () => {
     if (json) {
@@ -42,27 +42,29 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
   const handleSubmit = async (e: React.FormEvent) => {
     console.log("hellou");
    
+    formRef.current?.reset();
     
     e.preventDefault();
 
     if (json) {
       console.log("tinc json");
-      const newIngredient: Ingredient = {
+      const newIngredient: IngredientType = {
         ...ingredient,
         id: getNextIngredientId(),
       };
 
       console.log(newIngredient.id, newIngredient.nom);
+      const actualJson = await actionReadReceptes();
       const updatedJson = {
-        ...json,
-        ingredients: [...json.ingredients, newIngredient],
+        ...actualJson,
+        ingredients: [...actualJson.ingredients, newIngredient],
       };
       setJson(updatedJson);
       setIngredient(initialIngredient);
 
       await actionUpdateReceptes(updatedJson);
     }
-    else {console.log("no tinc json");}
+    //else {console.log("no tinc json");}
   };
 
   const deleteIngredient = async (id:number) => {
@@ -84,7 +86,7 @@ export default function RecipeData({ recipes }: { recipes: Recipe }) {
   return (
     <>
       <h1>{recipes.titol}</h1>
-      <form onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={handleSubmit}>
         <div className="flex items-center space-x-4">
           <div className="w-20">
           <label>Quantitat</label>
