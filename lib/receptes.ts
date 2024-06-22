@@ -5,7 +5,7 @@ export type RecipeType = {
     titol: string,
     ingredients: IngredientType[]
 }
-
+ 
 export type IngredientType = {
     id : number, 
     quantitat : string,

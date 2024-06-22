@@ -9,7 +9,7 @@ const jsonFilePath = "./data/receptes.json";
 
 export async function actionReadReceptes() {
   const jsonData = fs.readFileSync(jsonFilePath, "utf8");
-  const recipes: RecipeType = JSON.parse(jsonData);
+  const recipes = JSON.parse(jsonData);
   return recipes;
 }
 
