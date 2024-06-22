@@ -24,8 +24,6 @@ export async function actionReadReceptes() {
 }
 
 export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
-  const jsonData = fs.readFileSync(jsonFilePath, "utf8");
-  console.log(JSON.stringify(updatedRecipes));
 
   fs.writeFileSync(jsonFilePath, JSON.stringify(updatedRecipes), "utf8");
   revalidatePath("/");
