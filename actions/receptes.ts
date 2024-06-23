@@ -1,14 +1,14 @@
 "use server";
 import RecipeData from "@/components/RecipeData";
 import { IngredientType, RecipeType } from "@/lib/receptes";
-import fs from "fs";
+import  { readFile, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import path from "path";
 
 const jsonFilePath = "./data/receptes.json";
 
 export async function actionReadRecepta(id: number) {
-  const jsonData = fs.readFileSync(jsonFilePath, "utf8");
+  const jsonData = await readFile(jsonFilePath, "utf8");
 
   const recipes = JSON.parse(jsonData);
   const recipe = recipes.find((recep: RecipeType) => recep.id === id);
@@ -18,7 +18,7 @@ export async function actionReadRecepta(id: number) {
 }
 
 export async function actionReadReceptes() {
-  const jsonData = fs.readFileSync(jsonFilePath, "utf8");
+  const jsonData = await readFile(jsonFilePath, "utf8");
   const recipes = JSON.parse(jsonData);
   return recipes;
 }
@@ -31,7 +31,16 @@ export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
   const jsonData = fs.readFileSync(jsonFilePath, "utf8");
   console.log(JSON.stringify(updatedRecipes));
 */
-  fs.writeFileSync(jsonFilePath, JSON.stringify(updatedRecipes), "utf8");
+
+//Amb dues receptes el torno a llegir --> no crec que sigui l'opció òptima
+const jsonData = await readFile(jsonFilePath, "utf8");
+const recipes = JSON.parse(jsonData);
+const recipe = recipes.find((recep: RecipeType) => recep.id === updatedRecipes.id);
+
+
+const updatedJson = JSON.stringify(recipes).replace(JSON.stringify(recipe), JSON.stringify(updatedRecipes))
+
+await writeFile(jsonFilePath, updatedJson);
   revalidatePath("/");
 }
 
@@ -42,6 +51,7 @@ export async function actionDeleteIngredient(id: Number, recipes: RecipeType) {
       (ingredient) => ingredient.id !== id
     ),
   };
-  fs.writeFileSync(jsonFilePath, JSON.stringify(updatedJson), "utf8");
+
+  await writeFile (jsonFilePath, JSON.stringify(updatedJson));
   revalidatePath("/");
 }

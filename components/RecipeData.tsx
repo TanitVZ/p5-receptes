@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { actionReadReceptes, actionUpdateReceptes } from "@/actions/receptes";
+import { actionReadRecepta, actionReadReceptes, actionUpdateReceptes } from "@/actions/receptes";
 
 const initialIngredient: IngredientType = {
   id: 0,
@@ -54,7 +54,8 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
       };
 
       console.log(newIngredient.id, newIngredient.nom);
-      const actualJson = await actionReadReceptes();
+      const actualJson = await actionReadRecepta(recipes.id);
+      console.log("****", actualJson)
       const updatedJson = {
         ...actualJson,
         ingredients: [...actualJson.ingredients, newIngredient],

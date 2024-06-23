@@ -17,7 +17,7 @@ export default async function Page({ params }: PageProps){
 
   const { recipeId } = params;
   const data = await actionReadRecepta(Number(recipeId));
-  console.log(data)
+  //console.log(data)
   return ( 
     <main className="p-8">
        <RecipeData recipes={data} />
