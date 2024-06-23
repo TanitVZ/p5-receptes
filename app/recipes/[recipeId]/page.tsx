@@ -26,7 +26,7 @@ export default async function Page({ params }: PageProps) {
       <div className="flex flex-col justify-center gap-4 p-6 w-80">
         <ul>
           {recepta.ingredients.map((ingr: IngredientType) => (
-            <Ingredient key={ingr.id} ingredient={ingr} recipes={recepta} />
+            <Ingredient key={ingr.id} ingredient={ingr}  recipes={receptesAll}  recipeId={Number(recipeId)} />
           ))}
         </ul>
       </div>

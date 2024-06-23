@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { actionReadRecepta, actionReadReceptes, actionUpdateReceptes } from "@/actions/receptes";
-import { error } from "console";
+
 
 const initialIngredient: IngredientType = {
   id: 0,
