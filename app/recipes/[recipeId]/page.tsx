@@ -17,7 +17,7 @@ export default async function Page({ params }: PageProps) {
   const { recipeId } = params;
   const receptesAll = await actionReadReceptes();
  
-  const recepta =  receptesAll.receptes[recipeId]
+  const recepta =  receptesAll.receptes[Number(recipeId)-1]
 
 
   return (

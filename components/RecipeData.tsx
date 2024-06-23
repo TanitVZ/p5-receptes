@@ -24,7 +24,7 @@ const initialIngredient: IngredientType = {
 
 export default function RecipeData({ recipes , recipeId: recipeId}: { recipes: RecipesType , recipeId : number}) {
 
-  const recipe = recipes.receptes[recipeId];
+  const recipe = recipes.receptes[recipeId-1];
   const [ingredient, setIngredient] = useState<IngredientType>(initialIngredient);
   const [json, setJson] = useState<RecipeType>(recipe);
 
