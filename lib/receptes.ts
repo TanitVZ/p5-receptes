@@ -13,5 +13,8 @@ export type IngredientType = {
     nom : string
 }
 
+export type RecipesType = {
+    receptes : RecipeType[]
+}
 
 

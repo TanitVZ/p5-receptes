@@ -14,7 +14,7 @@ export default async function Home() {
     <main className="p-8">
       <div className="flex flex-col justify-center gap-4 p-6 w-80">
       <ul>
-        {data.map((recep: RecipeType) => ( 
+        {data.receptes.map((recep: RecipeType) => ( 
       <Recipe key={recep.id} recipes={recep}/>))}
       </ul>    
       </div>

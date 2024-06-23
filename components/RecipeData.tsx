@@ -40,14 +40,14 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("hellou");
+ 
    
     formRef.current?.reset();
     
     e.preventDefault();
 
     if (json) {
-      console.log("tinc json");
+  
       const newIngredient: IngredientType = {
         ...ingredient,
         id: getNextIngredientId(),
@@ -83,6 +83,7 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
 
   const addMesura = (v: string) =>
     setIngredient((prev) => ({ ...prev, mesura: v }));
+
 
   return (
     <>

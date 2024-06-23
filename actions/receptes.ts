@@ -1,6 +1,6 @@
 "use server";
 import RecipeData from "@/components/RecipeData";
-import { IngredientType, RecipeType } from "@/lib/receptes";
+import { IngredientType, RecipeType, RecipesType } from "@/lib/receptes";
 import  { readFile, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import path from "path";
@@ -11,9 +11,13 @@ export async function actionReadRecepta(id: number) {
   const jsonData = await readFile(jsonFilePath, "utf8");
 
   const recipes = JSON.parse(jsonData);
-  const recipe = recipes.find((recep: RecipeType) => recep.id === id);
+  
+  const recipe = recipes.receptes.find((recep: RecipeType) => recep.id === id);
+  
+  if (recipe) {
 
-  if (recipe) return recipe;
+    return recipe;
+  }
   else console.log("no hi ha recepta");
 }
 
@@ -34,12 +38,12 @@ export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
 
 //Amb dues receptes el torno a llegir --> no crec que sigui l'opció òptima
 const jsonData = await readFile(jsonFilePath, "utf8");
-const recipes = JSON.parse(jsonData);
-const recipe = recipes.find((recep: RecipeType) => recep.id === updatedRecipes.id);
+const recipes : RecipesType = JSON.parse(jsonData);
+const recipeIndex = updatedRecipes.id - 1
 
+recipes.receptes[recipeIndex] = updatedRecipes
 
-const updatedJson = JSON.stringify(recipes).replace(JSON.stringify(recipe), JSON.stringify(updatedRecipes))
-
+const updatedJson = JSON.stringify(recipes)
 await writeFile(jsonFilePath, updatedJson);
   revalidatePath("/");
 }

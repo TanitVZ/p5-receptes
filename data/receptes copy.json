@@ -1,0 +1,24 @@
+{
+  "receptes": [
+    {
+      "id": 1,
+      "titol": "Paella Valenciana",
+      "ingredients": [
+        { "id": 29, "quantitat": "1", "mesura": "l", "nom": "fumet" },
+        { "id": 30, "quantitat": "1", "mesura": "", "nom": "pebrot" },
+        { "id": 31, "quantitat": "1", "mesura": "Kg", "nom": "arroç" },
+        { "id": 32, "quantitat": "7", "mesura": "", "nom": "qqqq" }
+      ]
+    },
+    {
+      "id": 2,
+      "titol": "Fideuà",
+      "ingredients": [
+        { "id": 1, "quantitat": "1", "mesura": "l", "nom": "fumet" },
+        { "id": 2, "quantitat": "1", "mesura": "", "nom": "fideus" },
+        { "id": 3, "quantitat": "1", "mesura": "Kg", "nom": "tomàquets" }
+    
+      ]
+    }
+  ]
+}
