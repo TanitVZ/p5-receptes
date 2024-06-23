@@ -3,8 +3,8 @@ import RecipeData from "@/components/RecipeData";
 import { actionReadReceptes } from "@/actions/receptes";
 import { IngredientType } from "@/lib/receptes";
 
-//export const dynamic = "force-dynamic";
-//export const revalidate = 0;
+
+export const revalidate = 0;
 
 type PageProps = {
   params: {
