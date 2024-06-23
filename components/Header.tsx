@@ -7,7 +7,7 @@ export default function Header() {
     <header className={cn("h-16 p-4  bg-blue-800 text-white shadow-lg")}>
       <Link href="/">
         <div id="logo" className="font-extrabold text-xl text-white mr-4">
-          Receptes de l'àvia
+          Receptes de l&apos;àvia
         </div>
       </Link>
     </header>
