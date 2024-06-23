@@ -25,15 +25,10 @@ export async function actionReadReceptes() {
   return recipes;
 }
 
-export async function actionUpdateReceptes(recipes : RecipesType, updatedRecipes: RecipeType) {
-  //NO CAL TORNAR A LLEGIR TOT EL JSON, JA EL TENIM
-
-  //Amb dues receptes el torno a llegir --> no crec que sigui l'opció òptima
-  
-
-  //TODO --> mirar perquè al afegir ingredient, fa dos POST
-
-
+export async function actionUpdateReceptes(
+  recipes: RecipesType,
+  updatedRecipes: RecipeType
+) {
   const recipeIndex = updatedRecipes.id - 1;
 
   recipes.receptes[recipeIndex] = updatedRecipes;
@@ -43,9 +38,12 @@ export async function actionUpdateReceptes(recipes : RecipesType, updatedRecipes
   revalidatePath("/");
 }
 
-export async function actionDeleteIngredient(id: Number, recipes: RecipesType , recipeId: number) {
-
-  const recipe = recipes.receptes[recipeId -1]
+export async function actionDeleteIngredient(
+  id: Number,
+  recipes: RecipesType,
+  recipeId: number
+) {
+  const recipe = recipes.receptes[recipeId - 1];
   const updatedJson = {
     ...recipe,
     ingredients: recipe.ingredients.filter(
@@ -53,7 +51,7 @@ export async function actionDeleteIngredient(id: Number, recipes: RecipesType , 
     ),
   };
 
-  recipes.receptes[recipeId -1] = updatedJson;
+  recipes.receptes[recipeId - 1] = updatedJson;
 
   await writeFile(jsonFilePath, JSON.stringify(recipes));
   revalidatePath("/");
