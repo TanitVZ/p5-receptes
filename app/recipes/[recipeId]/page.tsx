@@ -15,16 +15,18 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const { recipeId } = params;
-  const data = await actionReadRecepta(Number(recipeId));
+  const receptesAll = await actionReadReceptes();
+ 
+  const recepta =  receptesAll.receptes[recipeId]
 
 
   return (
     <main className="p-8">
-      <RecipeData recipes={data} />
+      <RecipeData recipes={receptesAll} recipeId={Number(recipeId)}/>
       <div className="flex flex-col justify-center gap-4 p-6 w-80">
         <ul>
-          {data.ingredients.map((ingr: IngredientType) => (
-            <Ingredient key={ingr.id} ingredient={ingr} recipes={data} />
+          {recepta.ingredients.map((ingr: IngredientType) => (
+            <Ingredient key={ingr.id} ingredient={ingr} recipes={recepta} />
           ))}
         </ul>
       </div>

@@ -25,7 +25,7 @@ export async function actionReadReceptes() {
   return recipes;
 }
 
-export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
+export async function actionUpdateReceptes(recipes : RecipesType, updatedRecipes: RecipeType) {
   //NO CAL TORNAR A LLEGIR TOT EL JSON, JA EL TENIM
   // No estava bé el Home
   /*
@@ -38,8 +38,8 @@ export async function actionUpdateReceptes(updatedRecipes: RecipeType) {
   //TODO --> s'hauria de passar un objecte del tipus RecipesType enlloc de tornar a llegir
   //TODO --> mirar perquè al afegir ingredient, fa dos POST
 
-  const jsonData = await readFile(jsonFilePath, "utf8");
-  const recipes: RecipesType = JSON.parse(jsonData);
+  //const jsonData = await readFile(jsonFilePath, "utf8");
+  //const recipes: RecipesType = JSON.parse(jsonData);
   const recipeIndex = updatedRecipes.id - 1;
 
   recipes.receptes[recipeIndex] = updatedRecipes;

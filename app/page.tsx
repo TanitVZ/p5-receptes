@@ -1,5 +1,4 @@
-import Ingredient from "@/components/Ingredient";
-import RecipeData from "@/components/RecipeData";
+
 import { actionReadReceptes } from "@/actions/receptes";
 import Recipe from "@/components/Recipe";
 import { RecipeType } from "@/lib/receptes";

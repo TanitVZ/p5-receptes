@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEventHandler, useEffect, useRef, useState } from "react";
-import type { RecipeType, IngredientType } from "@/lib/receptes";
+import type { RecipeType, IngredientType, RecipesType } from "@/lib/receptes";
 import { Input } from "@/components/ui/input";
 
 import {
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { actionReadRecepta, actionReadReceptes, actionUpdateReceptes } from "@/actions/receptes";
+import { error } from "console";
 
 const initialIngredient: IngredientType = {
   id: 0,
@@ -21,9 +22,11 @@ const initialIngredient: IngredientType = {
   nom: "",
 };
 
-export default function RecipeData({ recipes }: { recipes: RecipeType }) {
+export default function RecipeData({ recipes , recipeId: recipeId}: { recipes: RecipesType , recipeId : number}) {
+
+  const recipe = recipes.receptes[recipeId];
   const [ingredient, setIngredient] = useState<IngredientType>(initialIngredient);
-  const [json, setJson] = useState<RecipeType>(recipes);
+  const [json, setJson] = useState<RecipeType>(recipe);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -54,7 +57,7 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
       };
 
       console.log(newIngredient.id, newIngredient.nom);
-      const actualJson = await actionReadRecepta(recipes.id);
+      const actualJson = await actionReadRecepta(recipe.id);
       console.log("****", actualJson)
       const updatedJson = {
         ...actualJson,
@@ -63,18 +66,20 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
       setJson(updatedJson);
       setIngredient(initialIngredient);
 
-      await actionUpdateReceptes(updatedJson);
+      await actionUpdateReceptes(recipes, updatedJson);
     }
     //else {console.log("no tinc json");}
   };
 
   const deleteIngredient = async (id:number) => {
     const updatedJson = { ...json, ingredients: json.ingredients.filter(ingredient => ingredient.id !== id)}
-    await actionUpdateReceptes(updatedJson);
+    await actionUpdateReceptes(recipes, updatedJson);
   }
   const addQuantitat: ChangeEventHandler<HTMLInputElement> = (e) => {
     //setIngredient((prev) => ({ ...prev, quantitat: Number(e.target.value) }));
-    setIngredient((prev) => ({ ...prev, quantitat: e.target.value }));
+    //TODO controlar el formulari amb Zod
+    if ( !isNaN(Number(e.target.value)))
+      setIngredient((prev) => ({ ...prev, quantitat: e.target.value }));
   };
 
   const addNom: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -87,7 +92,7 @@ export default function RecipeData({ recipes }: { recipes: RecipeType }) {
 
   return (
     <>
-      <h1>{recipes.titol}</h1>
+      <h1>{recipe.titol}</h1>
       <form ref={formRef} onSubmit={handleSubmit}>
         <div className="flex items-center space-x-4">
           <div className="w-20">
